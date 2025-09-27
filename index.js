@@ -1,6 +1,7 @@
 const express = require('express');
+const process = require('node:process');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.port || 3000;
 let email = "leramalkevich@gmail.com";
 const emailPath = emailTransformation(email);
 
