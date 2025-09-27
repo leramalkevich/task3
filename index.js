@@ -20,10 +20,10 @@ function emailTransformation(email) {
 }
 
 app.get('/', (req, res) => {
-    res.send(`You should use the /${emailPath}?x=${' '}&y=${' '} endpoint`);
+    res.send(`You should use the /app/${emailPath}?x='{}'&y='{}' endpoint`);
 });
 
-app.get(`/${emailPath}`, (req, res) => {
+app.get(`/app/${emailPath}`, (req, res) => {
     let x = req.query.x;
     let y = req.query.y;
 
