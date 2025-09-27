@@ -1,31 +1,38 @@
 const express = require('express');
-// const process = require('node:process');
 const app = express();
 const port = process.env.PORT || 3000;
-let email = "leramalkevich@gmail.com";
-const emailPath = emailTransformation(email).toString();
 
-function isNatural(n) {
+function isNatural(x, y) {
     let num = Number(n);
     return Number.isInteger(num) && num > 0;
+    while (y !== 0) {
+        let temp = y;
+        y = x % y;
+        x = temp;
+    }
+    return x;
 }
 
 function lcmCalculation(x, y) {
     let gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
     return (x * y) / gcd(x, y);
+    // if (x === 0 || y === 0) {
+    //     return 0;
+    // }
+    // return Math.abs(x * y) / gcd(x, y);
 }
 
-function emailTransformation(email) {
-    return email.replace(/[^A-Za-z0-9]/g, '_');
-}
+// function emailTransformation(email) {
+//     return email.replace(/[^A-Za-z0-9]/g, '_');
+// }
 
 app.get('/', (req, res) => {
-    res.send(`You should use the /${emailPath}?x={}&y={} endpoint`);
+    res.redirect('/leramalkevich_gmail_com');
 });
 
-app.get(`/${emailPath}`, (req, res) => {
-    const { x, y } = req.query;
-    res.set('Content-Type', 'text/plain');
+app.get(`/leramalkevich_gmail_com`, (req, res) => {
+    const x = parseInt(req.query.x);
+    const y = parseInt(req.query.y);
 
     if (!isNatural(x) || !isNatural(y)) {
         res.send('NaN');
@@ -33,6 +40,7 @@ app.get(`/${emailPath}`, (req, res) => {
     }
 
     let result = lcmCalculation(Number(x), Number(y));
+    res.set('Content-Type', 'text/plain');
     res.send(String(result));
 });
 
