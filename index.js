@@ -1,7 +1,7 @@
 const express = require('express');
 const process = require('node:process');
 const app = express();
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 let email = "leramalkevich@gmail.com";
 const emailPath = emailTransformation(email);
 
@@ -20,10 +20,10 @@ function emailTransformation(email) {
 }
 
 app.get('/', (req, res) => {
-    res.send(`You should use the /app/${emailPath}?x='{}'&y='{}' endpoint`);
+    res.send(`You should use the /${emailPath}?x={}&y={} endpoint`);
 });
 
-app.get(`/app/${emailPath}`, (req, res) => {
+app.get(`/${emailPath}`, (req, res) => {
     let x = req.query.x;
     let y = req.query.y;
 
