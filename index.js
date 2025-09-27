@@ -7,12 +7,12 @@ const emailPath = emailTransformation(email).toString();
 function isNatural(x, y) {
     let num = Number(n);
     return Number.isInteger(num) && num > 0;
-    while (y !== 0) {
-        let temp = y;
-        y = x % y;
-        x = temp;
-    }
-    return x;
+    // while (y !== 0) {
+    //     let temp = y;
+    //     y = x % y;
+    //     x = temp;
+    // }
+    // return x;
 }
 
 function lcmCalculation(x, y) {
