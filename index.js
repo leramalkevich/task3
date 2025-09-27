@@ -33,8 +33,8 @@ app.get('/', (req, res) => {
 });
 
 app.get(`/${emailPath}`, (req, res) => {
-    const x = parseInt(req.query.x);
-    const y = parseInt(req.query.y);
+    const x = req.query.x;
+    const y = req.query.y;
 
     if (!isNatural(x) || !isNatural(y)) {
         res.send('NaN');
