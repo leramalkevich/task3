@@ -33,5 +33,5 @@ app.get(`/${emailPath}`, (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running at ${port}`);
+    console.log(`Server running at ${port}/${emailPath}?x=3&y=16`);
 });
