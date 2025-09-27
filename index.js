@@ -19,6 +19,10 @@ function emailTransformation(email) {
     return email.replace(/[^A-Za-z0-9]/g, '_');
 }
 
+app.get('/', (req, res) => {
+    res.send(`You should use the /${emailPath}?x=${' '}&y=${' '} endpoint`);
+});
+
 app.get(`/${emailPath}`, (req, res) => {
     let x = req.query.x;
     let y = req.query.y;
