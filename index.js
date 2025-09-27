@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
+const email = "leramalkevich@gmail.com";
+const emailPath = emailTransformation(email).toString();
 
 function isNatural(x, y) {
     let num = Number(n);
@@ -22,15 +24,15 @@ function lcmCalculation(x, y) {
     // return Math.abs(x * y) / gcd(x, y);
 }
 
-// function emailTransformation(email) {
-//     return email.replace(/[^A-Za-z0-9]/g, '_');
-// }
+function emailTransformation(email) {
+    return email.replace(/[^A-Za-z0-9]/g, '_');
+}
 
 app.get('/', (req, res) => {
-    res.redirect('/leramalkevich_gmail_com');
+    res.redirect(`/${emailPath}`);
 });
 
-app.get(`/leramalkevich_gmail_com`, (req, res) => {
+app.get(`/${emailPath}`, (req, res) => {
     const x = parseInt(req.query.x);
     const y = parseInt(req.query.y);
 
