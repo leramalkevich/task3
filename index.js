@@ -1,9 +1,9 @@
 const express = require('express');
-const process = require('node:process');
+// const process = require('node:process');
 const app = express();
 const port = process.env.PORT || 3000;
 let email = "leramalkevich@gmail.com";
-const emailPath = emailTransformation(email);
+const emailPath = emailTransformation(email).toString();
 
 function isNatural(n) {
     let num = Number(n);
