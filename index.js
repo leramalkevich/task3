@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
 
 app.get(`/${emailPath}`, (req, res) => {
     const { x, y } = req.query;
+    res.set('Content-Type', 'text/plain');
 
     if (!isNatural(x) || !isNatural(y)) {
         res.send('NaN');
