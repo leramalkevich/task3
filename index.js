@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000;
 const email = "leramalkevich@gmail.com";
 const emailPath = emailTransformation(email).toString();
 
-function isNatural(x, y) {
+function isNatural(n) {
     let num = Number(n);
     return Number.isInteger(num) && num > 0;
     // while (y !== 0) {
