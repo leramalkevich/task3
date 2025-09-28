@@ -37,9 +37,9 @@ app.get('/', async (req, res) => {
     try {
         // Выполняем GET-запрос на обновлённый URL
         const response = await fetch(updatedUrl);
-        // const data = await response.text(); // или response.json(), зависит от ответа
+        const data = await response.text(); // или response.json(), зависит от ответа
         res.set('Content-Type', 'text/plain');
-        res.send(String(result));
+        res.send(String(data));
         // res.send(`Ответ с сервера по обновлённому URL:\n${data}`);
     } catch (error) {
         res.status(500).send(`Ошибка при запросе: ${error.message}`);
