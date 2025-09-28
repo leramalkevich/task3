@@ -22,26 +22,27 @@ function emailTransformation(email) {
 
 app.get('/', (req, res) => {
     res.redirect(`/${emailPath}`);
-    let url = port.toString();
-    let params = url.searchParams();
-    params.set('x', x);
-    params.set('y', y);
-    const newUrl = url.toString();
-    app.get(newUrl, (req, res) => {
-    // app.get(`/${emailPath}{x=${x}&y=${y}}`, (req, res) => {
-        const x = req.query.x;
-        const y = req.query.y;
-
-        if (!isNatural(x) || !isNatural(y)) {
-            res.send('NaN');
-            return;
-        }
-
-        let result = lcmCalculation(Number(x), Number(y));
-        res.set('Content-Type', 'text/plain');
-        res.send(String(result));
-    });
 });
+
+const url = new URL(window.location.href);
+url.searchParams.append('x', x.toString());
+url.searchParams.append('y', y.toString());
+history.pushState({}, '', url.toString());
+
+app.get(`/${emailPath}`, (req, res) => {
+    const x = req.query.x;
+    const y = req.query.y;
+
+    if (!isNatural(x) || !isNatural(y)) {
+        res.send('NaN');
+        return;
+    }
+
+    let result = lcmCalculation(Number(x), Number(y));
+    res.set('Content-Type', 'text/plain');
+    res.send(String(result));
+});
+
 
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
