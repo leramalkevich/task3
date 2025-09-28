@@ -57,8 +57,8 @@ app.get('/', (req, res) => {
 });
 
 app.get(`/${emailPath}`, (req, res) => {
-    const x = req.query.x || '';
-    const y = req.query.y || '';
+    const x = req.query.x || '{}';
+    const y = req.query.y || '{}';
     const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     const urlObj = new URL(currentUrl);
     urlObj.searchParams.set('x', x);
