@@ -21,9 +21,9 @@ function emailTransformation(email) {
     return email.replace(/[^A-Za-z0-9]/g, '_');
 }
 
-app.use(`/${emailPath}`, (req, res, next) => {
-    // res.redirect(`/${emailPath}`);
-    next();
+app.use(`/${emailPath}`, (req, res) => {
+    res.redirect(`/${emailPath}`);
+    // next();
 });
 
 app.get(`/${emailPath}`, (req, res) => {
