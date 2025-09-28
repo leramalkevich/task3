@@ -37,8 +37,8 @@ app.get(`/${emailPath}`, (req, res) => {
     const currentUrl = fullUrl(req);
     // const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     // const urlObj = new URL(currentUrl);
-    currentUrl.searchParams.set('x', x.toString().trim());
-    currentUrl.searchParams.set('y', y.toString().trim());
+    currentUrl.searchParams.get('x');
+    currentUrl.searchParams.get('y');
     if (!isNatural(x) || !isNatural(y)) {
         res.type('text/plain').send('NaN');
         return;
