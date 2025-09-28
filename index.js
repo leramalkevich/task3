@@ -44,7 +44,7 @@ app.get(`/${emailPath}`, (req, res) => {
 });
 
 app.listen(port, () => {
-    const urlBase = `https://task3-5eov.onrender.com:${port}/${emailPath}`;
+    const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
     const urlWithParams = `${urlBase}?x={}&y={}`;
     console.log(`API доступен по адресу: ${urlWithParams}`);
     console.log(`Server running at ${port}`);
