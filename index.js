@@ -1,6 +1,6 @@
 const express = require('express');
 // const {router} = require("express/lib/application");
-const router = express.Router([options])
+const router = express.Router();
 const app = express();
 const port = process.env.PORT || 3000;
 const email = "leramalkevich@gmail.com";
