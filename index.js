@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 10000;
 const email = "leramalkevich@gmail.com";
 const emailPath = emailTransformation(email).toString().trim();
 
@@ -16,8 +16,12 @@ function lcmCalculation(x, y) {
 }
 
 function gcd(a, b) {
-    if (b === 0) return a;
-    return gcd(b, a % b);
+    while (b !== 0) {
+        const temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
 }
 
 function emailTransformation(email) {
@@ -39,6 +43,9 @@ app.get(`/${emailPath}`, (req, res) => {
     res.type('text/plain').send(result.toString());
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running at ${PORT}`);
+app.listen(port, () => {
+    const urlBase = `https://task3-5eov.onrender.com:${port}/${emailPath}`;
+    const urlWithParams = `${urlBase}?x={}&y={}`;
+    console.log(`API доступен по адресу: ${urlWithParams}`);
+    console.log(`Server running at ${port}`);
 });
