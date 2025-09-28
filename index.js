@@ -49,7 +49,7 @@ app.get(`/${emailPath}`, (req, res) => {
 });
 
 app.get('*', (req, res) => {
-    const targetUrl = new URL(`${port}/${emailPath}`);
+    const targetUrl = new URL();
     const x = req.query.x || 'NaN';
     const y = req.query.y || 'NaN';
     targetUrl.searchParams.set('x', x);
