@@ -2,9 +2,9 @@
   "name": "task3",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app/index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node app/index.js"
   },
   "private": true,
   "dependencies": {
