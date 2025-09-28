@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
     res.redirect(`/${emailPath}`);
 });
 
-app.get(`/${emailPath}`, (req, res) => {
+app.get(`/${emailPath}?x=${x}&y=${y}`, (req, res) => {
     const x = req.query.x;
     const y = req.query.y;
 
