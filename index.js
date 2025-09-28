@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const email = "leramalkevich@gmail.com";
-const emailPath = emailTransformation(email).toString();
+const emailPath = emailTransformation(email).toString().trim();
 let x = 5;
 let y = 13;
 
