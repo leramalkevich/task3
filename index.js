@@ -33,16 +33,14 @@ app.router(`/${emailPath}`, (req, res) => {
 });
 
 app.get(`/${emailPath}`, (req, res) => {
-    if (req.query.x || req.query.y) {
-        const x = req.query.x || 'NaN';
-        const y = req.query.y || 'NaN';
-        if (!isNatural(x) || !isNatural(y)) {
-            res.type('text/plain').send('NaN');
-            return;
-        }
-        let result = lcmCalculation(Number(x), Number(y));
-        res.type('text/plain').send(result.toString());
+    const x = req.query.x || 'NaN';
+    const y = req.query.y || 'NaN';
+    if (!isNatural(x) || !isNatural(y)) {
+        res.type('text/plain').send('NaN');
+        return;
     }
+    let result = lcmCalculation(Number(x), Number(y));
+    res.type('text/plain').send(result.toString());
 });
 
 app.listen(port, () => {
