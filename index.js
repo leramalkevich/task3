@@ -24,8 +24,8 @@ app.get('/', (req, res) => {
     res.redirect(`/${emailPath}`);
     const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     res.send(`Текущий URL: ${fullUrl}`);
-    fullUrl.searchParams.append('x', x.toString());
-    fullUrl.searchParams.append('y', y.toString());
+    fullUrl.searchParams.append('x', '{}');
+    fullUrl.searchParams.append('y', '{}');
 });
 
 app.get(`/${emailPath}`, (req, res) => {
