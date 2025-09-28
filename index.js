@@ -1,4 +1,6 @@
 const express = require('express');
+// const {router} = require("express/lib/application");
+const router = express.Router([options])
 const app = express();
 const port = process.env.PORT || 3000;
 const email = "leramalkevich@gmail.com";
@@ -19,11 +21,12 @@ function emailTransformation(email) {
     return email.replace(/[^A-Za-z0-9]/g, '_');
 }
 
-// app.get('/${emailPath}', (req, res) => {
-//     res.redirect(`/${emailPath}`);
-// });
+router.use(`/${emailPath}`, (req, res, next) => {
+    // res.redirect(`/${emailPath}`);
+    next();
+});
 
-app.get(`/${emailPath}`, (req, res) => {
+router.get(`/${emailPath}`, (req, res) => {
     const x = req.query.x || '{}';
     const y = req.query.y || '{}';
     // const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
