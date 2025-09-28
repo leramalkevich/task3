@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
     res.redirect(`/${emailPath}`);
 });
 
-const url = new URL(window.location.href);
+const url = new URL();
 url.searchParams.append('x', x.toString());
 url.searchParams.append('y', y.toString());
 history.pushState({}, '', url.toString());
