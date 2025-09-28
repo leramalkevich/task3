@@ -23,7 +23,7 @@ function emailTransformation(email) {
 //     res.redirect(`/${emailPath}`);
 // });
 
-app.get(`/${emailPath}`, (req, res) => {
+app.get(`${port}/${emailPath}`, (req, res) => {
     const x = req.query.x || '{}';
     const y = req.query.y || '{}';
     // const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
