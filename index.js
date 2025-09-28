@@ -32,13 +32,21 @@ app.get('/', (req, res) => {
 });
 
 app.get(`/${emailPath}`, (req, res) => {
+    // const x = req.query.x || 'NaN';
+    // const y = req.query.y || 'NaN';
+    // if (!isNatural(x) || !isNatural(y)) {
+    //     res.type('text/plain').send('NaN');
+    //     return;
+    // }
+    // let result = lcmCalculation(Number(x), Number(y));
+    // console.log(result);
+    // res.type('text/plain').send(result.toString());
+});
+
+app.get('*', (req, res) => {
+    // const targetUrl = new URL();
     const x = req.query.x || 'NaN';
     const y = req.query.y || 'NaN';
-    // const currentUrl = fullUrl(req);
-    // const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    // const urlObj = new URL(currentUrl);
-    // currentUrl.searchParams.get('x');
-    // currentUrl.searchParams.get('y');
     if (!isNatural(x) || !isNatural(y)) {
         res.type('text/plain').send('NaN');
         return;
@@ -46,16 +54,6 @@ app.get(`/${emailPath}`, (req, res) => {
     let result = lcmCalculation(Number(x), Number(y));
     console.log(result);
     res.type('text/plain').send(result.toString());
-});
-
-app.get('*', (req, res) => {
-    const targetUrl = new URL();
-    const x = req.query.x || 'NaN';
-    const y = req.query.y || 'NaN';
-    targetUrl.searchParams.set('x', x);
-    targetUrl.searchParams.set('y', y);
-
-    res.redirect(targetUrl.toString());
 });
 
 app.listen(port, () => {
