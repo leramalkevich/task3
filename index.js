@@ -19,11 +19,11 @@ function emailTransformation(email) {
     return email.replace(/[^A-Za-z0-9]/g, '_');
 }
 
-app.get('/app/${emailPath}', (req, res) => {
+app.get('/${emailPath}', (req, res) => {
     res.redirect(`/app/${emailPath}`);
 });
 
-app.get(`/app/${emailPath}`, (req, res) => {
+app.get(`/${emailPath}`, (req, res) => {
     const x = req.query.x || '{}';
     const y = req.query.y || '{}';
     const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
