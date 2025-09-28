@@ -48,6 +48,16 @@ app.get(`/${emailPath}`, (req, res) => {
     res.type('text/plain').send(result.toString());
 });
 
+app.get('*', (req, res) => {
+    const targetUrl = new URL(`${port}/${emailPath}`);
+    const x = req.query.x || 'NaN';
+    const y = req.query.y || 'NaN';
+    targetUrl.searchParams.set('x', x);
+    targetUrl.searchParams.set('y', y);
+
+    res.redirect(targetUrl.toString());
+});
+
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
 });
