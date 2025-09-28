@@ -9,21 +9,11 @@ let y = 13;
 function isNatural(n) {
     let num = Number(n);
     return Number.isInteger(num) && num > 0;
-    // while (y !== 0) {
-    //     let temp = y;
-    //     y = x % y;
-    //     x = temp;
-    // }
-    // return x;
 }
 
 function lcmCalculation(x, y) {
     let gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
     return (x * y) / gcd(x, y);
-    // if (x === 0 || y === 0) {
-    //     return 0;
-    // }
-    // return Math.abs(x * y) / gcd(x, y);
 }
 
 function emailTransformation(email) {
@@ -31,21 +21,26 @@ function emailTransformation(email) {
 }
 
 app.get('/', (req, res) => {
-    res.redirect(`/${emailPath}{x=${x}&y=${y}}`);
-});
+    res.redirect(`/${emailPath}`);
+    let url = port.toString();
+    let params = url.searchParams();
+    params.set('x', x);
+    params.set('y', y);
+    const newUrl = url.toString();
+    app.get(newUrl, (req, res) => {
+    // app.get(`/${emailPath}{x=${x}&y=${y}}`, (req, res) => {
+        const x = req.query.x;
+        const y = req.query.y;
 
-app.get(`/${emailPath}{x=${x}&y=${y}}`, (req, res) => {
-    const x = req.query.x;
-    const y = req.query.y;
+        if (!isNatural(x) || !isNatural(y)) {
+            res.send('NaN');
+            return;
+        }
 
-    if (!isNatural(x) || !isNatural(y)) {
-        res.send('NaN');
-        return;
-    }
-
-    let result = lcmCalculation(Number(x), Number(y));
-    res.set('Content-Type', 'text/plain');
-    res.send(String(result));
+        let result = lcmCalculation(Number(x), Number(y));
+        res.set('Content-Type', 'text/plain');
+        res.send(String(result));
+    });
 });
 
 app.listen(port, () => {
