@@ -28,8 +28,8 @@ function emailTransformation(email) {
     return email.replace(/[^A-Za-z0-9]/g, '_');
 }
 
-app.get('/', (req, res) => {
-    res.redirect(`/${emailPath}`);
+app.router(`/${emailPath}`, (req, res) => {
+    // res.redirect(`/${emailPath}`);
 });
 
 app.get(`/${emailPath}`, (req, res) => {
