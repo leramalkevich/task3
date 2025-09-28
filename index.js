@@ -1,17 +1,8 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 const email = "leramalkevich@gmail.com";
 const emailPath = emailTransformation(email).toString().trim();
-let url = require('url');
-
-function fullUrl(req) {
-    return url.format({
-        protocol: req.protocol,
-        host: req.get('host'),
-        pathname: req.originalUrl
-    });
-}
 
 function isNatural(n) {
     let num = Number(n);
@@ -19,8 +10,14 @@ function isNatural(n) {
 }
 
 function lcmCalculation(x, y) {
-    let gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
-    return (x * y) / gcd(x, y);
+    // let gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+    // return (x * y) / gcd(x, y);
+    return Math.abs(x * y) / gcd(x, y);
+}
+
+function gcd(a, b) {
+    if (b === 0) return a;
+    return gcd(b, a % b);
 }
 
 function emailTransformation(email) {
@@ -39,10 +36,9 @@ app.get(`/${emailPath}`, (req, res) => {
         return;
     }
     let result = lcmCalculation(Number(x), Number(y));
-    console.log(result);
     res.type('text/plain').send(result.toString());
 });
 
-app.listen(port, () => {
-    console.log(`Server running at ${port}`);
+app.listen(PORT, () => {
+    console.log(`Server running at ${PORT}`);
 });
