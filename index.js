@@ -21,14 +21,14 @@ function emailTransformation(email) {
     return email.replace(/[^A-Za-z0-9]/g, '_');
 }
 
-router.use(`/${emailPath}`, (req, res, next) => {
+app.use(`/${emailPath}`, (req, res, next) => {
     // res.redirect(`/${emailPath}`);
     next();
 });
 
-router.get(`/${emailPath}`, (req, res) => {
-    const x = req.query.x || '{}';
-    const y = req.query.y || '{}';
+app.get(`/${emailPath}`, (req, res) => {
+    const x = req.query.x || 'NaN';
+    const y = req.query.y || 'NaN';
     // const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     // const urlObj = new URL(currentUrl);
     // urlObj.searchParams.set('x', x.toString().trim());
@@ -38,7 +38,7 @@ router.get(`/${emailPath}`, (req, res) => {
         return;
     }
     let result = lcmCalculation(Number(x), Number(y));
-    // res.set('Content-Type', 'text/plain');
+    console.log(result);
     res.type('text/plain').send(result.toString());
 });
 
