@@ -27,8 +27,8 @@ function emailTransformation(email) {
 //     urlObj.searchParams.set('x', x);
 //     urlObj.searchParams.set('y', y);
 // });
-// app.get('/', (req, res) => {
-//     // res.redirect(`/${emailPath}`);
+app.get('/', (req, res) => {
+    res.redirect(`/${emailPath}`);
 //     // currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 //
 //     // const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
@@ -54,7 +54,7 @@ function emailTransformation(email) {
 //     // } catch (error) {
 //     //     res.status(500).send(`Ошибка при запросе: ${error.message}`);
 //     // }
-// });
+});
 
 app.get(`/${emailPath}`, (req, res) => {
     const x = req.query.x || '';
