@@ -1,11 +1,17 @@
 const express = require('express');
-// const {router} = require("express/lib/application");
-const router = express.Router();
 const app = express();
 const port = process.env.PORT || 3000;
 const email = "leramalkevich@gmail.com";
 const emailPath = emailTransformation(email).toString().trim();
-let currentUrl = '';
+let url = require('url');
+
+function fullUrl(req) {
+    return url.format({
+        protocol: req.protocol,
+        host: req.get('host'),
+        pathname: req.originalUrl
+    });
+}
 
 function isNatural(n) {
     let num = Number(n);
@@ -21,18 +27,18 @@ function emailTransformation(email) {
     return email.replace(/[^A-Za-z0-9]/g, '_');
 }
 
-app.use(`/${emailPath}`, (req, res) => {
+app.get('/', (req, res) => {
     res.redirect(`/${emailPath}`);
-    // next();
 });
 
 app.get(`/${emailPath}`, (req, res) => {
     const x = req.query.x || 'NaN';
     const y = req.query.y || 'NaN';
+    const currentUrl = fullUrl(req);
     // const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     // const urlObj = new URL(currentUrl);
-    // urlObj.searchParams.set('x', x.toString().trim());
-    // urlObj.searchParams.set('y', y.toString().trim());
+    currentUrl.searchParams.set('x', x.toString().trim());
+    currentUrl.searchParams.set('y', y.toString().trim());
     if (!isNatural(x) || !isNatural(y)) {
         res.type('text/plain').send('NaN');
         return;
@@ -41,11 +47,6 @@ app.get(`/${emailPath}`, (req, res) => {
     console.log(result);
     res.type('text/plain').send(result.toString());
 });
-
-
-// app.get('/', (req, res) => {
-//     res.redirect(`/${emailPath}`);
-// });
 
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
