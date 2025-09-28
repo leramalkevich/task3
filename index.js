@@ -33,19 +33,20 @@ app.get('/', (req, res) => {
 });
 
 app.get(`/${emailPath}`, (req, res) => {
-    const x = req.query.x || 'NaN';
-    const y = req.query.y || 'NaN';
-    if (!isNatural(x) || !isNatural(y)) {
-        res.type('text/plain').send('NaN');
-        return;
+    if (req.query.x || req.query.y) {
+        const x = req.query.x || 'NaN';
+        const y = req.query.y || 'NaN';
+        if (!isNatural(x) || !isNatural(y)) {
+            res.type('text/plain').send('NaN');
+            return;
+        }
+        let result = lcmCalculation(Number(x), Number(y));
+        res.type('text/plain').send(result.toString());
     }
-    let result = lcmCalculation(Number(x), Number(y));
-    res.type('text/plain').send(result.toString());
 });
 
 app.listen(port, () => {
     const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
-    // const urlBase = `https://task3-5eov.onrender.com:${port}/${emailPath}`;
     const urlWithParams = `${urlBase}?x={}&y={}`;
     console.log(urlWithParams);
 });
