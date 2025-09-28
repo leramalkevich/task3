@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
     res.redirect(`/${emailPath}`);
 });
 
-const url = new URL();
+const url = new URL(port.toString());
 url.searchParams.append('x', x.toString());
 url.searchParams.append('y', y.toString());
 history.pushState({}, '', url.toString());
