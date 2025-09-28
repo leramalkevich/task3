@@ -22,12 +22,11 @@ function emailTransformation(email) {
 
 app.get('/', (req, res) => {
     res.redirect(`/${emailPath}`);
+    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    res.send(`Текущий URL: ${fullUrl}`);
+    fullUrl.searchParams.append('x', x.toString());
+    fullUrl.searchParams.append('y', y.toString());
 });
-
-const url = new URL(port.toString());
-url.searchParams.append('x', x.toString());
-url.searchParams.append('y', y.toString());
-history.pushState({}, '', url.toString());
 
 app.get(`/${emailPath}`, (req, res) => {
     const x = req.query.x;
