@@ -34,11 +34,11 @@ app.get('/', (req, res) => {
 app.get(`/${emailPath}`, (req, res) => {
     const x = req.query.x || 'NaN';
     const y = req.query.y || 'NaN';
-    const currentUrl = fullUrl(req);
+    // const currentUrl = fullUrl(req);
     // const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     // const urlObj = new URL(currentUrl);
-    currentUrl.searchParams.get('x');
-    currentUrl.searchParams.get('y');
+    // currentUrl.searchParams.get('x');
+    // currentUrl.searchParams.get('y');
     if (!isNatural(x) || !isNatural(y)) {
         res.type('text/plain').send('NaN');
         return;
