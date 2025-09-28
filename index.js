@@ -28,7 +28,7 @@ document.getElementById('button').addEventListener('click', (e) => {
     urlObj.searchParams.set('y', y);
 });
 app.get('/', (req, res) => {
-    res.redirect(`/${emailPath}`);
+    // res.redirect(`/${emailPath}`);
     currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 
     // const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
