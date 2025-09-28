@@ -32,19 +32,6 @@ app.get('/', (req, res) => {
 });
 
 app.get(`/${emailPath}`, (req, res) => {
-    // const x = req.query.x || 'NaN';
-    // const y = req.query.y || 'NaN';
-    // if (!isNatural(x) || !isNatural(y)) {
-    //     res.type('text/plain').send('NaN');
-    //     return;
-    // }
-    // let result = lcmCalculation(Number(x), Number(y));
-    // console.log(result);
-    // res.type('text/plain').send(result.toString());
-});
-
-app.get('*', (req, res) => {
-    // const targetUrl = new URL();
     const x = req.query.x || 'NaN';
     const y = req.query.y || 'NaN';
     if (!isNatural(x) || !isNatural(y)) {
