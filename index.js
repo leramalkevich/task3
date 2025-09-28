@@ -31,7 +31,7 @@ function emailTransformation(email) {
 }
 
 app.get('/', (req, res) => {
-    res.redirect(`/${emailPath}{.x=:x&y=:y}`);
+    res.redirect(`/${emailPath}{.x=${x}&y=${y}}`);
 });
 
 app.get(`/${emailPath}{.x=${x}&y=${y}}`, (req, res) => {
