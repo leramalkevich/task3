@@ -19,30 +19,30 @@ function emailTransformation(email) {
     return email.replace(/[^A-Za-z0-9]/g, '_');
 }
 
-app.get('/${emailPath}', (req, res) => {
-    res.redirect(`/app/${emailPath}`);
-});
+// app.get('/${emailPath}', (req, res) => {
+//     res.redirect(`/${emailPath}`);
+// });
 
 app.get(`/${emailPath}`, (req, res) => {
     const x = req.query.x || '{}';
     const y = req.query.y || '{}';
-    const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    const urlObj = new URL(currentUrl);
-    urlObj.searchParams.set('x', x.toString().trim());
-    urlObj.searchParams.set('y', y.toString().trim());
+    // const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    // const urlObj = new URL(currentUrl);
+    // urlObj.searchParams.set('x', x.toString().trim());
+    // urlObj.searchParams.set('y', y.toString().trim());
     if (!isNatural(x) || !isNatural(y)) {
-        res.send('NaN');
+        res.type('text/plain').send('NaN');
         return;
     }
     let result = lcmCalculation(Number(x), Number(y));
-    res.set('Content-Type', 'text/plain');
-    res.send(String(result));
+    // res.set('Content-Type', 'text/plain');
+    res.type('text/plain').send(result.toString());
 });
 
 
-app.get('/', (req, res) => {
-    res.redirect(`/${emailPath}`);
-});
+// app.get('/', (req, res) => {
+//     res.redirect(`/${emailPath}`);
+// });
 
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
