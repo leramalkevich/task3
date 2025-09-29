@@ -3,6 +3,8 @@ const app = express();
 const port = process.env.PORT || 10000;
 const email = "leramalkevich@gmail.com";
 const emailPath = emailTransformation(email).toString().trim();
+let x = {};
+let y = {};
 
 function isNatural(n) {
     let num = Number(n);
@@ -34,7 +36,7 @@ app.get('/', (req, res) => {
     res.redirect(`/${emailPath}`);
 });
 
-app.get(`/${emailPath}?x=${encodeURIComponent({})}&y=${encodeURIComponent({})}`, (req, res) => {
+app.get(`/${emailPath}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`, (req, res) => {
     const x = req.query.x || 'NaN';
     const y = req.query.y || 'NaN';
     if (!isNatural(x) || !isNatural(y)) {
