@@ -45,7 +45,7 @@ function emailTransformation(email) {
 //     });
 
 // router.get(`/`, (req, res) => {
-app.get(`/app/${emailPath}`, (req, res) => {
+app.get(`/${emailPath}`, (req, res) => {
     const x = req.query.x || 'NaN';
     const y = req.query.y || 'NaN';
     if (!isNatural(x) || !isNatural(y)) {
