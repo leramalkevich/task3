@@ -40,7 +40,7 @@ function getRandomBigInt() {
 }
 
 app.get('/', (req, res) => {
-    const url = `/${emailPath}?x=${encodeURIComponent(JSON.stringify(x))}&y=${encodeURIComponent(JSON.stringify(y))}`;
+    const url = `/${emailPath}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
     res.redirect(url);
 });
 
@@ -50,8 +50,8 @@ app.get(`/${emailPath}`, (req, res) => {
             res.type('text/plain').send('NaN');
             return;
         }
-        const x = JSON.parse(req.query.x);
-        const y = JSON.parse(req.query.y);
+        const x = req.query.x;
+        const y = req.query.y;
         if (!isNatural(x) || !isNatural(y)) {
             res.type('text/plain').send('NaN');
             return;
