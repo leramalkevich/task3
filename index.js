@@ -50,6 +50,6 @@ app.get(`/${emailPath}`, (req, res) => {
 
 app.listen(port, () => {
     const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
-    const urlWithParams = `${urlBase}{.x=${encodeURIComponent(JSON.stringify(x))}&y=${encodeURIComponent(JSON.stringify(y))}}`;
+    const urlWithParams = `${urlBase}?x=${encodeURIComponent(JSON.stringify(x))}&y=${encodeURIComponent(JSON.stringify(y))}`;
     console.log(urlWithParams);
 });
