@@ -8,7 +8,7 @@ let y = Math.floor(Math.random());
 
 function isNatural(n) {
     let num = Number(n);
-    return Number.isInteger(num) && num >= 0;
+    return Number.isInteger(num) && num > 0;
 }
 
 function lcmCalculation(x, y) {
