@@ -33,10 +33,11 @@ function emailTransformation(email) {
 }
 
 app.get('/', (req, res) => {
-    res.redirect(`/${emailPath}`);
+    const url = `/${emailPath}{.x=${encodeURIComponent(JSON.stringify(x))}&y=${encodeURIComponent(JSON.stringify(y))}}`;
+    res.redirect(url);
 });
 
-app.get(`/${emailPath}{.x=${encodeURIComponent(JSON.stringify(x))}&y=${encodeURIComponent(JSON.stringify(y))}}`, (req, res) => {
+app.get(`/${emailPath}`, (req, res) => {
     const x = JSON.parse(req.query.x);
     const y = JSON.parse(req.query.y);
     if (!isNatural(x) || !isNatural(y)) {
@@ -49,6 +50,6 @@ app.get(`/${emailPath}{.x=${encodeURIComponent(JSON.stringify(x))}&y=${encodeURI
 
 app.listen(port, () => {
     const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
-    const urlWithParams = `${urlBase}?x={}&y={}`;
+    const urlWithParams = `${urlBase}{.x=${encodeURIComponent(JSON.stringify(x))}&y=${encodeURIComponent(JSON.stringify(y))}}`;
     console.log(urlWithParams);
 });
