@@ -36,9 +36,9 @@ app.get('/', (req, res) => {
     res.redirect(`/${emailPath}`);
 });
 
-app.get(`/${emailPath}{.x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}}`, (req, res) => {
-    const x = req.query.x || 'NaN';
-    const y = req.query.y || 'NaN';
+app.get(`/${emailPath}{.x=${encodeURIComponent(JSON.stringify(x))}&y=${encodeURIComponent(JSON.stringify(y))}}`, (req, res) => {
+    const x = JSON.parse(req.query.x);
+    const y = JSON.parse(req.query.y);
     if (!isNatural(x) || !isNatural(y)) {
         res.type('text/plain').send('NaN');
         return;
