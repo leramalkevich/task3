@@ -1,19 +1,20 @@
 const express = require('express');
-// const app = express();
-// const port = process.env.PORT || 10000;
-// const email = "leramalkevich@gmail.com";
-// const emailPath = emailTransformation(email).toString().trim();
-const router = express.Router();
+const app = express();
+const port = process.env.PORT || 10000;
+const email = "leramalkevich@gmail.com";
+const emailPath = emailTransformation(email).toString().trim();
+// const router = express.Router();
 
 function isNatural(n) {
     let num = Number(n);
-    return Number.isInteger(num) && num > 0;
+    return Number.isInteger(num) && num >= 0;
 }
 
 function lcmCalculation(x, y) {
     // let gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
     // return (x * y) / gcd(x, y);
-    return Math.abs(x * y) / gcd(x, y);
+    // return Math.abs(x * y) / gcd(x, y);
+    return Math.floor(x / gcd(x, y)) * y;
 }
 
 function gcd(a, b) {
@@ -25,12 +26,12 @@ function gcd(a, b) {
     return a;
 }
 
-// function emailTransformation(email) {
-//     return email.replace(/[^A-Za-z0-9]/g, '_');
-// }
+function emailTransformation(email) {
+    return email.replace(/[^A-Za-z0-9]/g, '_');
+}
 
 // app.router(`/${emailPath}`)
-//     // res.redirect(`/${emailPath}`);
+//     res.redirect(`/${emailPath}`);
 //     .get((req, res) => {
 //         const x = req.query.x || 'NaN';
 //         const y = req.query.y || 'NaN';
@@ -41,10 +42,10 @@ function gcd(a, b) {
 //         let result = lcmCalculation(Number(x), Number(y));
 //         res.type('text/plain').send(result.toString());
 //     });
-    // });
+//     });
 
-router.get(`/`, (req, res) => {
-// app.get(`/${emailPath}`, (req, res) => {
+// router.get(`/`, (req, res) => {
+app.get(`/app/${emailPath}`, (req, res) => {
     const x = req.query.x || 'NaN';
     const y = req.query.y || 'NaN';
     if (!isNatural(x) || !isNatural(y)) {
@@ -55,10 +56,8 @@ router.get(`/`, (req, res) => {
     res.type('text/plain').send(result.toString());
 });
 
-// app.listen(port, () => {
-//     const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
-//     const urlWithParams = `${urlBase}?x={}&y={}`;
-//     console.log(urlWithParams);
-// });
-
-module.exports = router;
+app.listen(port, () => {
+    const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
+    const urlWithParams = `${urlBase}?x={}&y={}`;
+    console.log(urlWithParams);
+});
