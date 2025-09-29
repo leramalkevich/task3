@@ -1,10 +1,11 @@
 const express = require('express');
+const crypto = require('crypto');
 const app = express();
 const port = process.env.PORT || 10000;
 const email = "leramalkevich@gmail.com";
 const emailPath = emailTransformation(email).toString().trim();
-let x = Math.floor(Math.random() * 100) + 1;
-let y = Math.floor(Math.random()* 100) + 1;
+let x = getRandomBigInt();
+let y = getRandomBigInt();
 
 function isNatural(n) {
     let num = Number(n);
@@ -32,20 +33,36 @@ function emailTransformation(email) {
     return email.replace(/[^A-Za-z0-9]/g, '_');
 }
 
+function getRandomBigInt() {
+    const bytesCount = 64;
+    const buffer = crypto.randomBytes(bytesCount);
+    return BigInt('0x' + buffer.toString('hex'));
+}
+
 app.get('/', (req, res) => {
     const url = `/${emailPath}?x=${encodeURIComponent(JSON.stringify(x))}&y=${encodeURIComponent(JSON.stringify(y))}`;
     res.redirect(url);
 });
 
 app.get(`/${emailPath}`, (req, res) => {
-    const x = JSON.parse(req.query.x);
-    const y = JSON.parse(req.query.y);
-    if (!isNatural(x) || !isNatural(y)) {
+    try {
+        if (!req.query.x || !req.query.y) {
+            res.type('text/plain').send('NaN');
+            return;
+        }
+        const x = JSON.parse(req.query.x);
+        const y = JSON.parse(req.query.y);
+        if (!isNatural(x) || !isNatural(y)) {
+            res.type('text/plain').send('NaN');
+            return;
+        }
+        let result = lcmCalculation(Number(x), Number(y));
+        res.type('text/plain').send(result.toString());
+    } catch (error) {
         res.type('text/plain').send('NaN');
-        return;
     }
-    let result = lcmCalculation(Number(x), Number(y));
-    res.type('text/plain').send(result.toString());
+
+
 });
 
 app.listen(port, () => {
