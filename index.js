@@ -3,8 +3,8 @@ const app = express();
 const port = process.env.PORT || 10000;
 const email = "leramalkevich@gmail.com";
 const emailPath = emailTransformation(email).toString().trim();
-let x = {};
-let y = {};
+let x = Math.floor(Math.random());
+let y = Math.floor(Math.random());
 
 function isNatural(n) {
     let num = Number(n);
