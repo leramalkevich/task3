@@ -14,7 +14,13 @@ function lcmCalculation(x, y) {
     // let gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
     // return (x * y) / gcd(x, y);
     // return Math.abs(x * y) / gcd(x, y);
-    return Math.floor(x / gcd(x, y)) * y;
+    // return Math.floor(x / gcd(x, y)) * y;
+    const divisor = gcd(x, y);
+    // Используем BigInt для очень больших чисел
+    const bigA = BigInt(x);
+    const bigB = BigInt(y);
+    const bigDivisor = BigInt(divisor);
+    return (bigA / bigDivisor) * bigB;
 }
 
 function gcd(a, b) {
