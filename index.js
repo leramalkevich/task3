@@ -3,13 +3,16 @@ const crypto = require('crypto');
 const app = express();
 const port = process.env.PORT || 10000;
 const email = "leramalkevich@gmail.com";
-const emailPath = emailTransformation(email).toString().trim();
-let x = getRandomBigInt();
-let y = getRandomBigInt();
 
 function isNatural(n) {
-    let num = Number(n);
-    return Number.isInteger(num) && num > 0;
+    // let num = Number(n);
+    // return Number.isInteger(num) && num > 0;
+    try {
+        const num = BigInt(n);
+        return num > 0n;
+    } catch {
+        return false;
+    }
 }
 
 function lcmCalculation(x, y) {
@@ -40,11 +43,15 @@ function getRandomBigInt() {
 }
 
 app.get('/', (req, res) => {
+    const emailPath = emailTransformation(email).toString().trim();
+    let x = getRandomBigInt();
+    let y = getRandomBigInt();
     const url = `/${emailPath}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
+
     res.redirect(url);
 });
 
-app.get(`/${emailPath}`, (req, res) => {
+app.get('/:emailPath', (req, res) => {
     try {
         if (!req.query.x || !req.query.y) {
             res.type('text/plain').send('NaN');
@@ -56,7 +63,7 @@ app.get(`/${emailPath}`, (req, res) => {
             res.type('text/plain').send('NaN');
             return;
         }
-        let result = lcmCalculation(Number(x), Number(y));
+        let result = lcmCalculation(BigInt(x), BigInt(y));
         res.type('text/plain').send(result.toString());
     } catch (error) {
         res.type('text/plain').send('NaN');
@@ -66,7 +73,7 @@ app.get(`/${emailPath}`, (req, res) => {
 });
 
 app.listen(port, () => {
-    const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
-    const urlWithParams = `${urlBase}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
-    console.log(urlWithParams);
+    // const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
+    // const urlWithParams = `${urlBase}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
+    // console.log(urlWithParams);
 });
