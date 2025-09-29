@@ -33,7 +33,7 @@ function emailTransformation(email) {
 }
 
 app.get('/', (req, res) => {
-    const url = `/${emailPath}{.x=${encodeURIComponent(JSON.stringify(x))}&y=${encodeURIComponent(JSON.stringify(y))}}`;
+    const url = `/${emailPath}?x=${encodeURIComponent(JSON.stringify(x))}&y=${encodeURIComponent(JSON.stringify(y))}`;
     res.redirect(url);
 });
 
