@@ -55,11 +55,11 @@ app.get('/', (req, res) => {
 app.get(`/:emailPath{.x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}}`, (req, res) => {
     try {
         if (!req.query.x || !req.query.y) {
-            res.type('text/plain').send('NaN');
+            // res.type('text/plain').send('NaN');
             return;
         }
-        const x = req.query.x;
-        const y = req.query.y;
+        const x = req.query.x || 'NaN';
+        const y = req.query.y || 'NaN';
         if (!isNatural(x) || !isNatural(y)) {
             res.type('text/plain').send('NaN');
             return;
@@ -73,6 +73,6 @@ app.get(`/:emailPath{.x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}}`, (
 
 app.listen(port, () => {
     const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
-    const urlWithParams = `${urlBase}?x={${encodeURIComponent(x)}}&y={${encodeURIComponent(y)}}`;
+    const urlWithParams = `${urlBase}?x={}&y={}`;
     console.log(urlWithParams);
 });
