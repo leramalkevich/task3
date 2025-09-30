@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
 app.get(`/:emailPath{.x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}}`, (req, res) => {
     try {
         if (!req.query.x || !req.query.y) {
-            // res.type('text/plain').send('NaN');
+            res.type('text/plain').send('');
             return;
         }
         const x = req.query.x || 'NaN';
