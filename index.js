@@ -48,12 +48,13 @@ function getRandomBigInt() {
 app.get('/', (req, res) => {
     let x = getRandomBigInt();
     let y = getRandomBigInt();
-    const url = `/${emailPath}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
+    const url = `/${emailPath}`;
+    // const url = `/${emailPath}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
 
     res.redirect(url);
 });
 
-app.get('/:emailPath', (req, res) => {
+app.get('/:emailPath?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}', (req, res) => {
     try {
         if (!req.query.x || !req.query.y) {
             res.type('text/plain').send('NaN');
@@ -75,7 +76,7 @@ app.get('/:emailPath', (req, res) => {
 });
 
 app.listen(port, () => {
-    const urlBase = `https://task3-5eov.onrender.com:${port}/${emailPath}`;
+    const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
     const urlWithParams = `${urlBase}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
     console.log(urlWithParams);
     console.log(`Server listening on port ${port}`);
