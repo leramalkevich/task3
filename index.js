@@ -63,7 +63,7 @@ app.get('/:emailPath', (req, res) => {
             res.type('text/plain').send('NaN');
             return;
         }
-        let result = lcmCalculation(BigInt(x), BigInt(y));
+        let result = lcmCalculation(Number(x), Number(y));
         res.type('text/plain').send(result.toString());
     } catch (error) {
         res.type('text/plain').send('NaN');
@@ -73,7 +73,8 @@ app.get('/:emailPath', (req, res) => {
 });
 
 app.listen(port, () => {
-    // const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
-    // const urlWithParams = `${urlBase}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
-    // console.log(urlWithParams);
+    const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
+    const urlWithParams = `${urlBase}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
+    console.log(urlWithParams);
+    console.log(`${port}`);
 });
