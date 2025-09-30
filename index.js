@@ -73,6 +73,6 @@ app.get(`/:emailPath{.x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}}`, (
 
 app.listen(port, () => {
     const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
-    const urlWithParams = `${urlBase}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
+    const urlWithParams = `${urlBase}?x={${encodeURIComponent(x)}}&y={${encodeURIComponent(y)}}`;
     console.log(urlWithParams);
 });
