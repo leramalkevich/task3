@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
     res.redirect(url);
 });
 
-app.get('/:emailPath{.x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}}', (req, res) => {
+app.get(`/:emailPath{.x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}}`, (req, res) => {
     try {
         if (!req.query.x || !req.query.y) {
             res.type('text/plain').send('NaN');
@@ -71,8 +71,6 @@ app.get('/:emailPath{.x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}}', (
     } catch (error) {
         res.type('text/plain').send('NaN');
     }
-
-
 });
 
 app.listen(port, () => {
