@@ -56,7 +56,7 @@ app.get(`/${emailPath}`, (req, res) => {
 // app.get(`/:emailPath{.x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}}`, (req, res) => {
     try {
         if (!req.query.x || !req.query.y) {
-            res.type('text/plain').send('');
+            res.type('text/plain').send('NaN');
             return;
         }
         const x = req.query.x || 'NaN';
@@ -65,7 +65,7 @@ app.get(`/${emailPath}`, (req, res) => {
             res.type('text/plain').send('NaN');
             return;
         }
-        let result = lcmCalculation(Number(x), Number(y));
+        let result = lcmCalculation(BigInt(x), BigInt(y));
         res.type('text/plain').send(result.toString());
     } catch (error) {
         res.type('text/plain').send('NaN');
