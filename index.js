@@ -1,8 +1,11 @@
 const express = require('express');
 const crypto = require('crypto');
 const app = express();
-const port = process.env.PORT || 10000;
+const port = process.env.PORT || 3000;
 const email = "leramalkevich@gmail.com";
+const emailPath = emailTransformation(email).toString().trim();
+let x = getRandomBigInt();
+let y = getRandomBigInt();
 
 function isNatural(n) {
     // let num = Number(n);
@@ -43,7 +46,6 @@ function getRandomBigInt() {
 }
 
 app.get('/', (req, res) => {
-    const emailPath = emailTransformation(email).toString().trim();
     let x = getRandomBigInt();
     let y = getRandomBigInt();
     const url = `/${emailPath}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
@@ -73,8 +75,8 @@ app.get('/:emailPath', (req, res) => {
 });
 
 app.listen(port, () => {
-    const urlBase = `https://task3-5eov.onrender.com/${emailPath}`;
+    const urlBase = `https://task3-5eov.onrender.com:${port}/${emailPath}`;
     const urlWithParams = `${urlBase}?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
     console.log(urlWithParams);
-    console.log(`${port}`);
+    console.log(`Server listening on port ${port}`);
 });
