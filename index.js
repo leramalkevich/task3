@@ -27,7 +27,9 @@ function lcmCalculation(x, y) {
 }
 
 function gcd(a, b) {
-    while (b !== 0) {
+    a = BigInt(a);
+    b = BigInt(b);
+    while (b !== 0n) {
         const temp = b;
         b = a % b;
         a = temp;
